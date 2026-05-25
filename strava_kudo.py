@@ -19,6 +19,13 @@ import time
 import tempfile
 from pathlib import Path
 
+# Cron doesn't inherit the desktop session env, so browser_cookie3's call into
+# the Secret Service (via DBus) fails with KeyError on DBUS_SESSION_BUS_ADDRESS.
+# Default it to the user's systemd bus when it's available and not already set.
+_bus = f"/run/user/{os.getuid()}/bus"
+if "DBUS_SESSION_BUS_ADDRESS" not in os.environ and os.path.exists(_bus):
+    os.environ["DBUS_SESSION_BUS_ADDRESS"] = f"unix:path={_bus}"
+
 import browser_cookie3
 import requests
 
