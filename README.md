@@ -53,17 +53,6 @@ entries (or nothing if you're already caught up).
 
 State (already-kudoed activity IDs) is persisted to `state.json`.
 
-## Cron
-
-Every 30 minutes, using the local `cron-log` wrapper which prefixes lines with
-timestamp + tag and appends to `~/.local/var/log/cron.log`:
-
-```cron
-*/30 * * * * cron-log strava-kudo python /home/qdu/projects/strava-kudo/strava_kudo.py
-```
-
-Tail the log with `grep '\[strava-kudo\]' ~/.local/var/log/cron.log` to see runs.
-
 Edge must be installed (the script reads from `~/.config/microsoft-edge/Default/Cookies`).
 You don't need Edge running, but it must have a valid Strava session — if cookies
 expire (typically months), the script will exit with a clear error and you just
