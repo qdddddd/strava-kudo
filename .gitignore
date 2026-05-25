@@ -1,0 +1,4 @@
+state.json
+strava_kudo.log
+*.log
+__pycache__/
